@@ -27,6 +27,7 @@ library
   exposed-modules:
       Lib
       Transformations.DataParsing
+      Transformations.Extraction
       Types.Index
       Types.WebPageData
       Types.WebPageDataProcessed
@@ -38,6 +39,7 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , scalpel
     , text
   default-language: Haskell2010
 
@@ -53,6 +55,7 @@ executable hsearch-exe
     , base >=4.7 && <5
     , bytestring
     , hsearch
+    , scalpel
     , text
   default-language: Haskell2010
 
@@ -69,5 +72,6 @@ test-suite hsearch-test
     , base >=4.7 && <5
     , bytestring
     , hsearch
+    , scalpel
     , text
   default-language: Haskell2010
