@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Lib ( search )
 
 main :: IO ()
-main = someFunc
+main = search
