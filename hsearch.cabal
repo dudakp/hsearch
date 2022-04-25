@@ -30,6 +30,7 @@ library
       Transformations.Extraction
       Types.Index
       Types.WebPageData
+      Types.WebPageDataPreProcessed
       Types.WebPageDataProcessed
   other-modules:
       Paths_hsearch
@@ -39,6 +40,7 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , regex-compat
     , scalpel
     , text
   default-language: Haskell2010
@@ -55,6 +57,7 @@ executable hsearch-exe
     , base >=4.7 && <5
     , bytestring
     , hsearch
+    , regex-compat
     , scalpel
     , text
   default-language: Haskell2010
@@ -72,6 +75,7 @@ test-suite hsearch-test
     , base >=4.7 && <5
     , bytestring
     , hsearch
+    , regex-compat
     , scalpel
     , text
   default-language: Haskell2010

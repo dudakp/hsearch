@@ -5,7 +5,9 @@ module Types.Index
 where
 
 data InvertedIndex = InvertedIndex
-  {word :: String, documents :: [String]}
+  { word :: String,
+    documents :: [String]
+  }
   deriving (Show)
 
 data ForwardIndex = ForwardIndex

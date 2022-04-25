@@ -34,7 +34,7 @@ instance FromJSON WebPageData where
 loadParsedData :: FilePath -> IO [Maybe WebPageData]
 loadParsedData file = do
   res <- loadFile file
-  let byLine = split (c2w '\n') res
+  let byLine = split (c2w '\n') res :: [ByteString]
   let decoded = map (\line -> decode line :: Maybe WebPageData) byLine
   let r = filter isJust decoded
   return r
