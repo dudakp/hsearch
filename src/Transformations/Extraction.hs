@@ -16,8 +16,12 @@ import Types.WebPageDataPreProcessed
   ( WebPageDataPreProcessed (WebPageDataPreProcessed, url, words),
   )
 import Types.WebPageDataProcessed (WebPageDataProcessed (WebPageDataProcessed, words), url)
+import Types.Index (ForwardIndex (ForwardIndex))
+import qualified Types.Index as Index
+import qualified Types.Index as Index.ForwardIndex
+import Data.List (nub)
 
-executePipeline :: Maybe WebPageData -> Maybe WebPageDataProcessed
+executePipeline :: Maybe WebPageData -> Maybe Index.ForwardIndex 
 executePipeline = cleanData . filterData . splitData . stripData . parseHtml
 
 parseHtml :: Maybe WebPageData -> Maybe WebPageDataPreProcessed
@@ -67,14 +71,14 @@ filterData (Just d) = do
     )
 filterData Nothing = undefined
 
-cleanData :: Maybe WebPageDataPreProcessed -> Maybe WebPageDataProcessed
+cleanData :: Maybe WebPageDataPreProcessed -> Maybe ForwardIndex 
 cleanData (Just d) = do
   let converted = map T.unpack (Types.WebPageDataPreProcessed.words d)
   let cleaned = map (\w -> subRegex (mkRegex "<[^>]*>") w "") converted
   return
-    ( WebPageDataProcessed
-        { Types.WebPageDataProcessed.url = Types.WebPageDataPreProcessed.url d,
-          Types.WebPageDataProcessed.words = cleaned
+    ( ForwardIndex 
+        { Index.ForwardIndex.document = Types.WebPageDataPreProcessed.url d,
+          Index.ForwardIndex.words = nub cleaned
         }
     )
 cleanData Nothing = undefined

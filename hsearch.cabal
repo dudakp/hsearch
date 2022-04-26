@@ -28,6 +28,7 @@ library
       Lib
       Transformations.DataParsing
       Transformations.Extraction
+      Transformations.IndexOperations
       Types.Index
       Types.WebPageData
       Types.WebPageDataPreProcessed
