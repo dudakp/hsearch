@@ -15,7 +15,7 @@ import Types.WebPageDataProcessed (WebPageDataProcessed (WebPageDataProcessed), 
 import qualified Types.WebPageDataProcessed as WebPageDataProcessed
 
 search = do
-  loadedWebPageData <- loadParsedData "./res/data.jl" :: IO [Maybe WebPageData]
+  loadedWebPageData <- loadParsedData "./res/datalarge2.jl" :: IO [Maybe WebPageData]
   let res = map executePipeline loadedWebPageData :: [Maybe ForwardIndex]
   print res
 
