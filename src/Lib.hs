@@ -15,7 +15,7 @@ import Types.WebPageDataProcessed (WebPageDataProcessed (WebPageDataProcessed), 
 import qualified Types.WebPageDataProcessed as WebPageDataProcessed
 
 search = do
-  loadedWebPageData <- loadParsedData "./res/collection_reduced.jl" :: IO [Maybe WebPageData]
+  loadedWebPageData <- loadParsedData "./res/reduced.jl" :: IO [Maybe WebPageData]
   let res = map executePipeline loadedWebPageData :: [Maybe ForwardIndex]
   let urls = fmap (\o -> Types.Index.document o) <$> res
   print urls
