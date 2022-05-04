@@ -9,7 +9,7 @@ where
 import Data.Traversable (for)
 import Transformations.DataParsing (loadParsedData)
 import Transformations.Extraction (executePipeline)
-import Types.Index (ForwardIndex (ForwardIndex, document, words))
+import Types.Index (ForwardIndex (ForwardIndex, document, words, links), InvertedIndex (word))
 import Types.WebPageData (WebPageData (WebPageData))
 import Types.WebPageDataProcessed (WebPageDataProcessed (WebPageDataProcessed), words)
 import qualified Types.WebPageDataProcessed as WebPageDataProcessed
@@ -17,8 +17,8 @@ import qualified Types.WebPageDataProcessed as WebPageDataProcessed
 search = do
   loadedWebPageData <- loadParsedData "./res/reduced.jl" :: IO [Maybe WebPageData]
   let res = map executePipeline loadedWebPageData :: [Maybe ForwardIndex]
-  let urls = fmap (\o -> Types.Index.document o) <$> res
-  print urls
+  let urls = fmap (\o -> Types.Index.words o) <$> res
+  print (take 10 urls)
 
 check :: Maybe WebPageDataProcessed -> [String]
 check (Just d) = Types.WebPageDataProcessed.words d

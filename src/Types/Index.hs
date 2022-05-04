@@ -12,6 +12,7 @@ data InvertedIndex = InvertedIndex
 
 data ForwardIndex = ForwardIndex
   { document :: String,
-    words :: [String]
+    words :: [String],
+    links :: [String]
   }
   deriving (Show)
