@@ -29,6 +29,7 @@ library
       Transformations.DataParsing
       Transformations.Extraction
       Transformations.IndexOperations
+      Transformations.InvertedIndex
       Types.Index
       Types.WebPageData
       Types.WebPageDataPreProcessed
@@ -41,6 +42,7 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , regex-compat
     , scalpel
     , text
@@ -57,6 +59,7 @@ executable hsearch-exe
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , hsearch
     , regex-compat
     , scalpel
@@ -75,6 +78,7 @@ test-suite hsearch-test
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , hsearch
     , regex-compat
     , scalpel

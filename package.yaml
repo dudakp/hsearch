@@ -26,6 +26,7 @@ dependencies:
 - text
 - scalpel
 - regex-compat
+- containers 
 
 library:
   source-dirs: src
