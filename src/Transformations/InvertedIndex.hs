@@ -16,12 +16,14 @@ transformMap (ForwardIndex url [word] _) oldMap = newMap where
 transformMap (ForwardIndex url (word:rest) links) oldMap = transformMap (ForwardIndex url rest links) newMap where 
     newMap = if Map.member word oldMap then Map.update (updateMap url) word oldMap else Map.insert word [url] oldMap
 
+transformMap (ForwardIndex _ [] _) oldMap = oldMap
+
 updateMap :: String -> [String] -> Maybe [String]
-updateMap url urls = Just (nub (url:urls))
 updateMap url [] = Just (url:[])
+updateMap url urls = Just (nub (url:urls))
 
 transform :: [ForwardIndex] -> InvertMap -> InvertMap 
 transform [index] oldMap = transformMap index oldMap 
 transform (index:rest) oldMap = transform rest newMap where 
     newMap = transformMap index oldMap
-
+transform [] oldMap = oldMap
