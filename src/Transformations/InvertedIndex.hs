@@ -6,6 +6,7 @@ import qualified Data.Map as Map
 import Types.Index (ForwardIndex (ForwardIndex), InvertedIndex (InvertedIndex))
 import Data.List (nub)
 
+
 type InvertMap = Map.Map String [String]
 emptyMap = Map.empty
 
@@ -19,7 +20,6 @@ transformMap (ForwardIndex url (word:rest) links) oldMap = transformMap (Forward
 transformMap (ForwardIndex _ [] _) oldMap = oldMap
 
 updateMap :: String -> [String] -> Maybe [String]
-updateMap url [] = Just (url:[])
 updateMap url urls = Just (nub (url:urls))
 
 transform :: [ForwardIndex] -> InvertMap -> InvertMap 

@@ -6,30 +6,31 @@ module Lib
   )
 where
 
+import qualified Data.Maybe
 import Data.Traversable (for)
 import Transformations.DataParsing (loadParsedData)
 import Transformations.Extraction (executePipeline)
-import Transformations.IndexOperations (buildInvertedIndex, InvertMap, find)
-import Types.Index (ForwardIndex (ForwardIndex, document, words, links), InvertedIndex)
+import Transformations.IndexOperations (InvertMap, buildInvertedIndex, find)
+import Types.Index (ForwardIndex (ForwardIndex, document, links, words), InvertedIndex)
 import Types.WebPageData (WebPageData (WebPageData))
 import Types.WebPageDataProcessed (WebPageDataProcessed (WebPageDataProcessed), words)
 import qualified Types.WebPageDataProcessed as WebPageDataProcessed
 
+search :: IO ()
 search = do
-  loadedWebPageData <- loadParsedData "./res/reduced.jl" :: IO [Maybe WebPageData]
+  loadedWebPageData <- loadParsedData "./res/larget.txt" :: IO [Maybe WebPageData]
   let res = map executePipeline loadedWebPageData :: [Maybe ForwardIndex]
-  
   let forwardData = buildInvertedIndex res :: Maybe InvertMap
-  print forwardData
 
   putStrLn "search:"
   searchWord <- getLine
 
-  putStrLn "result:"
-  print $ find searchWord forwardData
-
-  -- let urls = fmap (\o -> Types.Index.words o) <$> res
-  -- print (take 10 urls)
+  let searchResult = find searchWord forwardData
+  if Data.Maybe.isJust searchResult
+    then do
+      putStrLn "result:"
+      print searchResult
+    else print "Term not found!"
 
 check :: Maybe WebPageDataProcessed -> [String]
 check (Just d) = Types.WebPageDataProcessed.words d
